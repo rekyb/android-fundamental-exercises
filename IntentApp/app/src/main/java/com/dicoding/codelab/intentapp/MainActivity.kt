@@ -1,6 +1,7 @@
 package com.dicoding.codelab.intentapp
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnMoveActivity: Button
     private lateinit var btnMoveWithData: Button
     private lateinit var btnMoveWithObject: Button
+    private lateinit var btnDialNumber: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnMoveWithObject = findViewById(R.id.btn_move_activity_object)
         btnMoveWithObject.setOnClickListener(this)
+
+        btnDialNumber = findViewById(R.id.btn_dial_number)
+        btnDialNumber.setOnClickListener(this)
+
     }
 
     override fun onClick(p0: View?) {
@@ -44,6 +50,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 moveObjectIntent.putExtra(MoveWithObjectActivity.EXTRA_PERSON, person)
                 startActivity(moveObjectIntent)
+            }
+            R.id.btn_dial_number -> {
+                val phoneNumber = "123123123"
+                val dialPhoneIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+
+                startActivity(dialPhoneIntent)
             }
         }
     }
