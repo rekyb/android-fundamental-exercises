@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ModularTest</string>
+    <string name="go_to_main_activity_one">Go to main activity one</string>
+</resources>

@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 
-@Suppress("SameParameterValue")
 class RandomNumberWidget : AppWidgetProvider() {
 
     companion object {
@@ -27,7 +26,7 @@ class RandomNumberWidget : AppWidgetProvider() {
         remoteViews.setTextViewText(R.id.appwidget_text, lastUpdate)
         remoteViews.setOnClickPendingIntent(
             R.id.btn_click,
-            getPendingSelfIntent(context, appWidgetId, WIDGET_CLICK)
+            getPendingSelfIntent(context, appWidgetId)
         )
         appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
     }
@@ -67,11 +66,13 @@ class RandomNumberWidget : AppWidgetProvider() {
     private fun getPendingSelfIntent(
         context: Context,
         appWidgetId: Int,
-        action: String
     ): PendingIntent {
+
         val intent = Intent(context, RandomNumberWidget::class.java)
-        intent.action = action
+
+        intent.action = "android.appwidget.action.APPWIDGET_UPDATE"
         intent.putExtra(WIDGET_ID_EXTRA, appWidgetId)
+
         return PendingIntent.getActivity(
             context,
             appWidgetId,
